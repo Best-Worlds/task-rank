@@ -788,10 +788,10 @@ async function runSnapshotSync(defaultPmId?: string) {
 }
 
 function cronAuthorized(request: ApiRequest): boolean {
+  if (request.cron) return true
   const secret = process.env.CRON_SECRET?.trim()
   const bearer = request.authorization.startsWith("Bearer ") ? request.authorization.slice(7).trim() : ""
-  if (secret && bearer && bearer === secret) return true
-  return request.cron
+  return Boolean(secret && bearer && bearer === secret)
 }
 
 export async function handleSyncRequest(request: ApiRequest): Promise<ApiResponse> {
@@ -831,6 +831,12 @@ function headerOf(req: VercelRequest | Request, name: string): string {
   return typeof value === "string" ? value : Array.isArray(value) ? value[0] ?? "" : ""
 }
 
+function isVercelCronRequest(req: VercelRequest | Request): boolean {
+  const marker = headerOf(req, "x-vercel-cron").trim().toLowerCase()
+  if (marker === "1" || marker === "true") return true
+  return headerOf(req, "user-agent").toLowerCase().includes("vercel-cron")
+}
+
 async function readBody(req: VercelRequest | Request): Promise<string> {
   if (isWebRequest(req)) return req.text()
   const body = req.body
@@ -842,7 +848,7 @@ export default async function handler(req: VercelRequest | Request, res?: Vercel
     const result = await handleSyncRequest({
       method: req.method ?? "GET",
       authorization: headerOf(req, "authorization"),
-      cron: headerOf(req, "x-vercel-cron") === "1",
+      cron: isVercelCronRequest(req),
       body: req.method === "GET" || req.method === "HEAD" ? "" : await readBody(req),
     })
     if (res && typeof res.status === "function") {
