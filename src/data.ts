@@ -3,17 +3,17 @@ import type { Direction, Person, Project, Review, Scores, Task } from "./types"
 
 export const PROJECTS: Project[] = [
   { id: "portal", name: "Client portal", color: "#315c8a" },
-  { id: "campo", name: "Field app", color: "#2c6b4a" },
-  { id: "facturacion", name: "Billing", color: "#a24b24" },
+  { id: "field", name: "Field app", color: "#2c6b4a" },
+  { id: "billing", name: "Billing", color: "#a24b24" },
 ]
 
 export const PEOPLE: Person[] = [
   { id: "ana", name: "Ana Ruiz", role: "PM" },
-  { id: "martin", name: "Martín López", role: "PM" },
-  { id: "lucia", name: "Lucía Fernández", role: "Dev" },
+  { id: "martin", name: "Martin Lopez", role: "PM" },
+  { id: "lucia", name: "Lucia Fernandez", role: "Dev" },
   { id: "diego", name: "Diego Castro", role: "Dev" },
-  { id: "sofia", name: "Sofía Méndez", role: "Dev" },
-  { id: "joaquin", name: "Joaquín Pereyra", role: "Dev" },
+  { id: "sofia", name: "Sofia Mendez", role: "Dev" },
+  { id: "joaquin", name: "Joaquin Pereyra", role: "Dev" },
 ]
 
 type SeedReview = {
@@ -28,7 +28,7 @@ type SeedTask = Task & {
 
 const SEED: SeedTask[] = [
   {
-    id: "alta-clientes",
+    id: "client-onboarding",
     title: "Adjust the client onboarding flow",
     summary: "Onboarding had to accept clients without a tax ID and save a draft when a field was missing.",
     projectId: "portal",
@@ -51,10 +51,10 @@ const SEED: SeedTask[] = [
     ],
   },
   {
-    id: "impuestos",
+    id: "tax-calculation",
     title: "Fix the tax calculation",
     summary: "VAT rounding did not match billing on amounts with discounts.",
-    projectId: "facturacion",
+    projectId: "billing",
     devId: "diego",
     pmId: "martin",
     status: "completed",
@@ -74,10 +74,10 @@ const SEED: SeedTask[] = [
     ],
   },
   {
-    id: "ruta",
+    id: "day-route",
     title: "Build the day's route screen",
     summary: "The screen had to sort visits and show which ones were still pending.",
-    projectId: "campo",
+    projectId: "field",
     devId: "sofia",
     pmId: "ana",
     status: "completed",
@@ -100,7 +100,7 @@ const SEED: SeedTask[] = [
     id: "csv",
     title: "Export the invoices CSV",
     summary: "The file had to use the same fields administration uses for collections.",
-    projectId: "facturacion",
+    projectId: "billing",
     devId: "joaquin",
     pmId: "martin",
     status: "completed",
@@ -118,7 +118,7 @@ const SEED: SeedTask[] = [
     id: "push",
     title: "Send visit push notifications",
     summary: "The client had to be notified when the technician was one visit away.",
-    projectId: "campo",
+    projectId: "field",
     devId: "lucia",
     pmId: "ana",
     status: "completed",
@@ -138,7 +138,7 @@ const SEED: SeedTask[] = [
     ],
   },
   {
-    id: "permisos",
+    id: "permissions",
     title: "Define role-based permissions in the portal",
     summary: "Admin, operator, and read-only had to see different screens.",
     projectId: "portal",
@@ -161,10 +161,10 @@ const SEED: SeedTask[] = [
     ],
   },
   {
-    id: "conciliacion",
+    id: "payment-reconciliation",
     title: "Reconcile partial payments",
     summary: "A payment could cover part of an invoice and leave the balance open.",
-    projectId: "facturacion",
+    projectId: "billing",
     devId: "sofia",
     pmId: "martin",
     status: "completed",
@@ -184,10 +184,10 @@ const SEED: SeedTask[] = [
     ],
   },
   {
-    id: "mapa",
+    id: "offline-map",
     title: "Make the map available offline",
     summary: "The day's route had to stay visible even if the phone lost signal.",
-    projectId: "campo",
+    projectId: "field",
     devId: "joaquin",
     pmId: "ana",
     status: "completed",
@@ -195,7 +195,7 @@ const SEED: SeedTask[] = [
     completedAt: "2026-10-11",
   },
   {
-    id: "filtros",
+    id: "client-filters",
     title: "Add filters to the client list",
     summary: "The list had to filter by status, salesperson, and last purchase.",
     projectId: "portal",
@@ -206,10 +206,10 @@ const SEED: SeedTask[] = [
     completedAt: "2026-10-13",
   },
   {
-    id: "nota-credito",
+    id: "credit-note",
     title: "Issue a partial credit note",
     summary: "An already issued invoice had to be voidable for part of the amount.",
-    projectId: "facturacion",
+    projectId: "billing",
     devId: "diego",
     pmId: "martin",
     status: "in_progress",
@@ -217,10 +217,10 @@ const SEED: SeedTask[] = [
     completedAt: null,
   },
   {
-    id: "firma",
+    id: "visit-signature",
     title: "Request a digital signature on the visit",
     summary: "The client had to sign on the phone when closing the visit.",
-    projectId: "campo",
+    projectId: "field",
     devId: "sofia",
     pmId: "ana",
     status: "in_progress",
@@ -228,10 +228,10 @@ const SEED: SeedTask[] = [
     completedAt: null,
   },
   {
-    id: "historial",
+    id: "price-history",
     title: "Save the price-change history",
     summary: "Every price change had to keep date, user, and previous value.",
-    projectId: "facturacion",
+    projectId: "billing",
     devId: "joaquin",
     pmId: "martin",
     status: "completed",
@@ -297,10 +297,10 @@ const SEED: SeedTask[] = [
     ],
   },
   {
-    id: "avisos",
+    id: "overdue-alerts",
     title: "Email when an invoice is overdue",
     summary: "An overdue invoice had to trigger an email to the collections contact.",
-    projectId: "facturacion",
+    projectId: "billing",
     devId: "lucia",
     pmId: "martin",
     status: "completed",
@@ -320,7 +320,7 @@ const SEED: SeedTask[] = [
     ],
   },
   {
-    id: "sitio-octubre",
+    id: "october-site",
     title: "Launch the October marketing site",
     summary: "Two developers share the WordPress build while the PM tracks go-live.",
     projectId: "portal",

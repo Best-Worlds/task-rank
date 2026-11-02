@@ -408,6 +408,7 @@ function tasklistProjectMap(tasklists: TwTasklist[]): Map<string, string> {
 }
 
 const PROJECT_COLORS = ["#315c8a", "#2c6b4a", "#a24b24", "#6b4a8a", "#8a6b31", "#2f6f7a", "#8a3d5b"]
+/** Teamwork sometimes returns placeholder people as "Usuario N" or "User N". */
 const STUB_NAME = /^(Usuario|User) \d+$/
 
 function stripHtml(value: string): string {
